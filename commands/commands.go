@@ -43,6 +43,7 @@ func RegisterCommands() {
 		Admin: true, Args: 2, Desc: "Ban a user from the server. Usage: !ban <player> <reason>"})
 	CL.CommandList = append(CL.CommandList, Command{Name: "Unban", Command1: admin.UnbanPlayer,
 		Admin: true, Args: 1, Desc: "Unban a user from the server. Usage !unban <player>"})
+
 	// Util Commands
 	CL.CommandList = append(CL.CommandList, Command{Name: "Mods", Command: utils.ModsList,
 		Admin: false, Args: 0, Desc: "List the mods on the server"})
@@ -58,7 +59,7 @@ func commandListEmbed() *discordgo.MessageEmbed {
 			strAdmin = " - Admin Only!"
 		}
 		fields = append(fields, &discordgo.MessageEmbedField{
-			Name:  "!" + command.Name,
+			Name:  support.Config.Prefix + command.Name,
 			Value: command.Desc + strAdmin,
 		})
 	}

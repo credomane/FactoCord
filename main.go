@@ -149,7 +149,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content, support.Config.Prefix) {
 		//command := strings.Split(m.Content[1:len(m.Content)], " ")
 		//name := strings.ToLower(command[0])
-		input := strings.Replace(m.Content, "!", "", -1)
+		input := strings.Replace(m.Content, support.Config.Prefix, "", -1)
 		log.Print("[" + m.Author.Username + "] Command: " + input)
 		commands.RunCommand(input, s, m)
 		return
