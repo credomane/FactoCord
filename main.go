@@ -13,9 +13,9 @@ import (
 	"syscall"
 	"time"
 
-	"./support"
 	"./commands"
 	"./commands/admin"
+	"./support"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -142,20 +142,21 @@ func discord() {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	log.Print("[" + m.Author.Username + "] " + m.Content)
-
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
+	if strings.HasPrefix(m.Content, support.Config.Prefix) {
+		//command := strings.Split(m.Content[1:len(m.Content)], " ")
+		//name := strings.ToLower(command[0])
+		input := strings.Replace(m.Content, "!", "", -1)
+		log.Print("[" + m.Author.Username + "] Command: " + input)
+		commands.RunCommand(input, s, m)
+		return
+	}
+
 	if m.ChannelID == support.Config.FactorioChannelID {
-		if strings.HasPrefix(m.Content, support.Config.Prefix) {
-			//command := strings.Split(m.Content[1:len(m.Content)], " ")
-			//name := strings.ToLower(command[0])
-			input := strings.Replace(m.Content, "!", "", -1)
-			commands.RunCommand(input, s, m)
-			return
-		}
+		log.Print("[" + m.Author.Username + "] Says: " + m.Content)
 		// Pipes normal chat allowing it to be seen ingame
 		_, err := io.WriteString(Pipe, fmt.Sprintf("[Discord] <%s>: %s\r\n", m.Author.Username, m.ContentWithMentionsReplaced()))
 		if err != nil {
@@ -164,4 +165,3 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 }
-
