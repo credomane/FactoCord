@@ -1,2 +1,9 @@
+/.env
+*.exe
+/.exit
+/error.log
+/FactoCord
 /.idea/
+/factorio.log
+/.vscode
 /build/
