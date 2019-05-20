@@ -7,3 +7,5 @@ var R *bool
 
 // P references the var Pipe in main
 var P *io.WriteCloser
+
+var Stopped bool
