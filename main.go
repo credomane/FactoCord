@@ -1,6 +1,7 @@
 package main
 
 import (
+	"FactoCord/commands/utils"
 	"bufio"
 	"fmt"
 	"io"
@@ -38,6 +39,8 @@ func main() {
 	admin.R = &Running
 	admin.Stopped = false
 	Stopped = &admin.Stopped
+	utils.R = &Running
+	utils.Stopped = &admin.Stopped
 
 	FactoCord_version, _ = getFactoCordVersion()
 	commands.Version = FactoCord_version

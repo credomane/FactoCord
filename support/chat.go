@@ -17,6 +17,16 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 			ErrorLog(fmt.Errorf("%s: An error occurred when attempting to tail factorio.log\nDetails: %s", time.Now(), err))
 		}
 		for line := range t.Lines {
+			//Handle softmod commands here
+			if strings.Contains(line.Text, "[FACTOCORD]") || strings.Contains(line.Text, "[EVENT]") {
+				TmpList := strings.Split(line.Text, " ")
+				// Don't hard code the channelID! }:<
+				s.ChannelMessageSend(Config.FactorioChannelID, line.Text)
+				s.ChannelMessageSend(Config.FactorioChannelID, fmt.Sprintf("%s", strings.Join(TmpList[3:], " ")))
+				continue
+			}
+
+			//Handle chat, events, join, leave stuff here.
 			if strings.Contains(line.Text, "[CHAT]") || strings.Contains(line.Text, "[JOIN]") || strings.Contains(line.Text, "[LEAVE]") {
 				if !strings.Contains(line.Text, "<server>") {
 
