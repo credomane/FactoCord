@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=2.1
+version=2.2
 githash=`git log --pretty=format:'%h' -n 1`
 
 cat << EOF > ./version.go
