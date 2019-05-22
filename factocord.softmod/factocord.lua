@@ -13,8 +13,8 @@ end
 
 
 --/FactoCord command and helper functions
-local function log_message(event, msg)
-    print(event.tick .. " [FACTOCORD] " .. msg)
+local function log_message(tick, msg)
+    print(tick .. " [FACTOCORD] " .. msg)
 end
 
 local function FactoCord(name, tick, player_index, parameter)
@@ -24,8 +24,10 @@ local function FactoCord(name, tick, player_index, parameter)
     else
         playerName = game.players[player_index].name
     end
-    game.players[player_index].print('[FACTOCORD] {"name":"' .. name .. '","playerName":"' .. playerName ..
-        '","tick":' .. tick .. '","parameter":"' .. parameter .. '"}')
+
+    local msg = '[FACTOCORD] {"name":"' .. name .. '","playerName":"' .. playerName .. '","tick":' .. tick .. '","parameter":"' .. parameter .. '"}'
+    game.players[player_index].print(msg)
+    log_message(tick, msg)
 end
 
 add_command("FactoCord", "SoftMod function used by FactoCord bot", FactoCord)

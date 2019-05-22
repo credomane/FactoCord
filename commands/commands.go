@@ -33,7 +33,7 @@ var Version string
 // RegisterCommands registers the commands on start up.
 func RegisterCommands() {
 	// Admin Commands
-	CL.CommandList = append(CL.CommandList, Command{Name: "Start", Command: admin.StartServer
+	CL.CommandList = append(CL.CommandList, Command{Name: "Start", Command: admin.StartServer,
 		Admin: true, Args: 0, Desc: "Start the factorio server if it was stopped."})
 	CL.CommandList = append(CL.CommandList, Command{Name: "Stop", Command: admin.StopServer,
 		Admin: true, Args: 0, Desc: "Save the game and stop the factorio server."})

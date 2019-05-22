@@ -1,7 +1,6 @@
 package main
 
 import (
-	"FactoCord/commands/utils"
 	"bufio"
 	"fmt"
 	"io"
@@ -16,6 +15,7 @@ import (
 
 	"./commands"
 	"./commands/admin"
+	"./commands/utils"
 	"./support"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/joho/godotenv/autoload"
