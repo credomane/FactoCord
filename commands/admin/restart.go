@@ -2,6 +2,7 @@ package admin
 
 import (
 	"github.com/bwmarrin/discordgo"
+	"time"
 )
 
 // Restart saves and restarts the server
@@ -13,6 +14,7 @@ func Restart(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if *R && !Stopped {
 		//Call the dedicated start/stop functions.
 		StopServer(s, m)
+		time.Sleep(10 * time.Second)
 		StartServer(s, m)
 		return
 	}
